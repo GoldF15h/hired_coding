@@ -201,9 +201,9 @@ void add_to_cart(){
                 printf("ENTER YOUR DRUG ID : ");
                 scanf("%d",&id);
                 if( id >= 0 ){
-                    printf("\n[%d]\n",id+1);
-                    printf("NAME        : %s \n",drug_list[id].name);
-                    printf("PRICE       : %d \n",drug_list[id].price);
+                    printf("\n[%d]\n",id);
+                    printf("NAME        : %s \n",drug_list[id-1].name);
+                    printf("PRICE       : %d \n",drug_list[id-1].price);
                     printf("IS THAT WHAT YOU WANT TO ADD? [Y/N]\n");
                     while( add_input != 'y' && add_input != 'Y'  && add_input != 'n'  && add_input != 'N'  ){
                         add_input = _getch();
@@ -211,7 +211,7 @@ void add_to_cart(){
                             printf("ENTER AMOUNT : ");
                             scanf("%d",&amount_input);
                             if( amount_input > 0 ){
-                                add_by_id(id,amount_input);
+                                add_by_id(id-1,amount_input);
                             }else{
                                 printf("AMOUT MUST EXCEED 0\n");
                                 printf("PRESS ANY KEY TO CONTINUE...");
