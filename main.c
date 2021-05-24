@@ -8,7 +8,6 @@
 struct med {
     char name[100];
     int price;
-    char description[100];
 } drug_list[100] , tmp ;
 char drug_list_name[20] = "drug_list.txt";
 
@@ -16,13 +15,12 @@ char _ ;
 int drug_list_size = -1;
 int cart[100][2];
 int cart_size = 0;
-int list_show_size = 5;
 
 void list_of_drug ();
-void show_drug(int start);
+void show_drug();
 
 void buy_drug();
-void show_cart(int start);
+void show_cart();
 
 void add_to_cart();
 void add_by_id(int id,int amount);
@@ -93,7 +91,6 @@ void list_of_drug (){ // ดูรายชื่อยา
             show_drug(start);
             printf("\n[0]MAIN MENU\n");
             printf("[1]DRUG SEARCH\n");
-            printf("[<]PREVIOUS     [>]NEXT\n");
             printf("*******************************\n");
 
             input = _getch();
@@ -106,7 +103,6 @@ void list_of_drug (){ // ดูรายชื่อยา
                         printf("\n[%d] \n",id+1);
                         printf("NAME        : %s \n",drug_list[id].name);
                         printf("PRICE       : %d \n",drug_list[id].price);
-                        printf("DESCRIPTION : %s \n",drug_list[id].description);
                     }
                     else{
                         printf("DRUG NOT FOUND!!\n");
@@ -115,36 +111,18 @@ void list_of_drug (){ // ดูรายชื่อยา
                     _ = _getch();
                 break;
 
-                case '.':
-                case '>':
-
-                    start += list_show_size;
-                    if(start >= drug_list_size){
-                        start -= list_show_size;
-                    }
-                break;
-                case ',':
-                case '<':
-                    start -= list_show_size;
-                    if(start < 0){
-                        start = 0;
-                    }
-                break;
             }
         }
     }
 
 }
 
-void show_drug(int start){
+void show_drug(){
 	int i;
-    for(i = start ; i < start+list_show_size ; i++){
-        if ( i < drug_list_size ){
-            printf("\n[%d] \n",i+1);
-            printf("NAME        : %s \n",drug_list[i].name);
-            printf("PRICE       : %d \n",drug_list[i].price);
-            printf("DESCRIPTION : %s \n",drug_list[i].description);
-        }
+    for(i = 0 ; i < drug_list_size ; i++){
+        printf("\n[%d] \n",i+1);
+        printf("NAME        : %s \n",drug_list[i].name);
+        printf("PRICE       : %d \n",drug_list[i].price);
     }
 }
 
@@ -163,7 +141,6 @@ void buy_drug(){ // ซื้อยา
         printf("[2]REMOVE ITEM\n");
         printf("[3]CLEAR CART\n");
         printf("[4]CHECKOUT\n");
-        printf("[<]PREVIOUS     [>]NEXT\n");
         printf("*******************************\n");
         input = _getch();
 
@@ -180,37 +157,21 @@ void buy_drug(){ // ซื้อยา
             case '4':
                 check_out();
             break;
-            case '.':
-            case '>':
-                start += list_show_size;
-                if(start >= cart_size){
-                    start -= list_show_size;
-                }
-            break;
-            case ',':
-            case '<':
-                start -= list_show_size;
-                if(start < 0){
-                    start = 0;
-                }
-            break;
-
         }
     }
 }
 
-void show_cart(int start){
+void show_cart(){
 	int i;
+	int show;
     if(cart_size > 0){
-        for( i = start ; i < start + list_show_size ; i++ ){
-            int show = cart[i][0];
-                if( i < cart_size ){
-                    printf("\n[%d]\n",i+1);
-                    printf("NAME        : %s \n",drug_list[show].name);
-                    printf("PRICE       : %d \n",drug_list[show].price);
-                    printf("DESCRIPTION : %s \n",drug_list[show].description);
-                    printf("AMOUNT      : %d \n",cart[i][1]);
-                }
+        for( i = 0 ; i < cart_size ; i++ ){
+            show = cart[i][0];
+            printf("\n[%d]\n",i+1);
+            printf("NAME        : %s \n",drug_list[show].name);
+            printf("PRICE       : %d \n",drug_list[show].price);
+            printf("AMOUNT      : %d \n",cart[i][1]);
+
         }
     }else{
         printf("YOUR CART IS NOW EMPTY....\n");
@@ -219,9 +180,8 @@ void show_cart(int start){
 
 void add_to_cart(){
     int start = 0;
-    int id_input = -1;
     int amount_input = 0;
-    int id;
+    int id = -1;
     char input = '_';
     char add_input = '_';
 
@@ -234,38 +194,16 @@ void add_to_cart(){
         printf("\n[0]BACK\n");
         printf("[1]ADD ITEM\n");
         printf("[2]SEARCH FOR DRUG\n");
-        printf("[<]PREVIOUS     [>]NEXT\n");
         printf("*******************************\n");
         input = _getch();
         switch(input){
             case '1':
                 printf("ENTER YOUR DRUG ID : ");
-                scanf("%d",&id_input);
-                if( 0 < id_input && id_input <= drug_list_size){
-                printf("ENTER AMOUNT : ");
-                scanf("%d",&amount_input);
-                    if( amount_input > 0 ){
-                        add_by_id(id_input-1,amount_input);
-                    }else{
-                        printf("AMOUT MUST EXCEED 0\n");
-                        printf("PRESS ANY KEY TO CONTINUE...");
-                        _ = _getch();
-                    }
-
-                }else{
-                    printf("DRUG NOT FOUND\n");
-                    printf("PRESS ANY KEY TO CONTINUE...");
-
-                    _ = _getch();
-                }
-            break;
-            case '2':
-                id = search_drug();
+                scanf("%d",&id);
                 if( id >= 0 ){
                     printf("\n[%d]\n",id+1);
                     printf("NAME        : %s \n",drug_list[id].name);
                     printf("PRICE       : %d \n",drug_list[id].price);
-                    printf("DESCRIPTION : %s \n",drug_list[id].description);
                     printf("IS THAT WHAT YOU WANT TO ADD? [Y/N]\n");
                     while( add_input != 'y' && add_input != 'Y'  && add_input != 'n'  && add_input != 'N'  ){
                         add_input = _getch();
@@ -282,23 +220,43 @@ void add_to_cart(){
                         }
                     }
                     add_input = '_';
-                }
-            break;
-            case '.':
-            case '>':
-                start += list_show_size;
-                if(start >= drug_list_size){
-                    start -= list_show_size;
-                }
-            break;
-            case ',':
-            case '<':
-                start -= list_show_size;
-                if(start < 0){
-                    start = 0;
-                }
-            break;
+                }else{
+                    printf("DRUG NOT FOUND 0\n");
+                    printf("PRESS ANY KEY TO CONTINUE...");
+                    _ = _getch();
 
+                }
+
+            break;
+            case '2':
+                id = search_drug();
+                if( id >= 0 ){
+                    printf("\n[%d]\n",id+1);
+                    printf("NAME        : %s \n",drug_list[id].name);
+                    printf("PRICE       : %d \n",drug_list[id].price);
+                    printf("IS THAT WHAT YOU WANT TO ADD? [Y/N]\n");
+                    while( add_input != 'y' && add_input != 'Y'  && add_input != 'n'  && add_input != 'N'  ){
+                        add_input = _getch();
+                        if(add_input == 'y' || add_input == 'Y'){
+                            printf("ENTER AMOUNT : ");
+                            scanf("%d",&amount_input);
+                            if( amount_input > 0 ){
+                                add_by_id(id,amount_input);
+                            }else{
+                                printf("AMOUT MUST EXCEED 0\n");
+                                printf("PRESS ANY KEY TO CONTINUE...");
+                                _ = _getch();
+                            }
+                        }
+                    }
+                    add_input = '_';
+                }else{
+                    printf("DRUG NOT FOUND 0\n");
+                    printf("PRESS ANY KEY TO CONTINUE...");
+                    _ = _getch();
+
+                }
+            break;
         }
 
     }
@@ -347,7 +305,6 @@ void remove_from_cart(){
         show_cart(start);
         printf("\n[0]BACK\n");
         printf("[1]REMOVE ITEM\n");
-        printf("[<]PREVIOUS     [>]NEXT\n");
         printf("*******************************\n");
         input = _getch();
         switch(input){
@@ -363,20 +320,6 @@ void remove_from_cart(){
                     printf("PRESS ANY KEY TO CONTINUE...");
 
                     _ = _getch();
-                }
-            break;
-            case '.':
-            case '>':
-                start += list_show_size;
-                if(start >= drug_list_size){
-                    start -= list_show_size;
-                }
-            break;
-            case ',':
-            case '<':
-                start -= list_show_size;
-                if(start < 0){
-                    start = 0;
                 }
             break;
         }
@@ -449,26 +392,8 @@ void check_out(){
         total = total_price();
         printf("\nAMOUNT = %d\n",total);
         printf("\n[0]BACK\n");
-        printf("[1]CHECKOUT ITEM\n");
         printf("*******************************\n");
         input = _getch();
-        if(input == '1'){
-
-            printf("ENTER PAY AMOUNT : ");
-            scanf("%d",&paid);
-             change = paid - total;
-            if ( change >= 0 ){
-                printf("CHANGE : %d BAHT\n",change);
-                clear_cart();
-
-            }else{
-                printf("MONEY IS NOT NOUGHT TO PURCHSE\n");
-            }
-            printf("PRESS ANY KEY TO CONTINUE...");
-
-            _ = _getch();
-            return ;
-        }
     }
 };
 
@@ -509,11 +434,9 @@ void read_file(){ // อ่านไฟล์มาเก็บไว้ใน array
     for(i = 0 ; i < drug_list_size ; i++){
         fscanf(fptr,"%s", &tmp_name);
         fscanf(fptr,"%d", &tmp_price);
-        fscanf(fptr,"%s", &tmp_description);
         //printf("%s %d %s \n",tmp_name,tmp_price,tmp_description);
         strcpy(drug_list[i].name ,tmp_name);
         drug_list[i].price = tmp_price;
-        strcpy(drug_list[i].description ,tmp_description);
     }
     fclose(fptr);
 
