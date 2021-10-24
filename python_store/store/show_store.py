@@ -11,9 +11,9 @@ def show_store ():
     # แสดงผลส่วนของหน้าหลัก
     print( "="*10 + " LKB RESTAURANT " + "="*10 )
     print()
-    print( " " * front_spacing + "[1]   MENU" )
-    print( " " * front_spacing + "[2]   MANAGE CART" )
-    print( " " * front_spacing + "[3]   CHECK OUT" )
-    print( " " * front_spacing + "[ESC] EXIT" )
+    print( " " * front_spacing + "[1]  MENU" )
+    print( " " * front_spacing + "[2]  MANAGE CART" )
+    print( " " * front_spacing + "[3]  CHECK OUT" )
+    print( " " * front_spacing + "[0]  EXIT" )
     print()
     print( "="*36)

@@ -1,0 +1,7 @@
+from menu.print.get_menu_detail import get_menu_detail
+
+def print_search_menu_list (menu_list,search) :
+    print(" "*5+" SEARCH RESAULT FOR : " + '" ' +search + ' "')
+    for i in range(len(menu_list)) :
+        if search in menu_list[i][0] :
+            print('No.',i,',',get_menu_detail( menu_list[i] ))

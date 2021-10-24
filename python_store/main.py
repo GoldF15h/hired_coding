@@ -13,7 +13,7 @@ from check_out.check_out import check_out
 # สร้างตัวแปรเก็บค่า state ปัจจุบันของร้านค้า
 current_state = 0
 
-# สร้าง dict สำหรับเก็บ function สำหรับแสดงผล
+# สร้าง dict สำหรับเก็บ function สำหรับเมนูต่าง ๆ
 switch = {  
     0 : store,
     1 : menu,
@@ -21,14 +21,13 @@ switch = {
     3 : check_out
 }
 
-# print(switch[current_state])
-
+# ทำงานคำสั่งและเปลี่ยน current_state ไปเรื่อย ๆ ตามแต่ state ของโปรแกรม
 while True :
 
     try :
         current_state = switch[current_state]()
-        print('in main')
         if current_state == -1 :
             break
-    except :
-        pass
+    except Exception as e:
+        print(e)
+        _ = input()
