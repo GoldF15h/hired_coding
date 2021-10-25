@@ -1,8 +1,5 @@
 import os
 
-# กำหนดตัวแปรสำหรับเว้นระยะห่างด้านหน้าของเมนู
-front_spacing = 11
-
 def show_store ():
 
     # ล้างการแสดงผลของหน้าจอ
@@ -11,9 +8,11 @@ def show_store ():
     # แสดงผลส่วนของหน้าหลัก
     print( "="*10 + " LKB RESTAURANT " + "="*10 )
     print()
-    print( " " * front_spacing + "[1]  MENU" )
-    print( " " * front_spacing + "[2]  MANAGE CART" )
-    print( " " * front_spacing + "[3]  CHECK OUT" )
-    print( " " * front_spacing + "[0]  EXIT" )
+    print(' '*10 + "STORE")
+    print()
+    print( " " * 10 + "[1] MENU" )
+    print( " " * 10 + "[2] MANAGE CART" )
+    print( " " * 10 + "[3] CHECK OUT" )
+    print( " " * 10 + "[0] EXIT" )
     print()
     print( "="*36)

@@ -1,0 +1,2 @@
+def get_cart_detail(cart_item) :
+    return "NAME : " + cart_item[0] + " ,AMOUNT : " + str(cart_item[1]) + " ,PRICE : " + str(cart_item[2]) + "฿" + " ,SUB TOTAL : " + str(cart_item[1]*cart_item[2]) + "฿" 

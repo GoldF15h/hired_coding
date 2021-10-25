@@ -5,10 +5,13 @@ import keyboard
 def store () :
     while True :
 
-        # แรกฟังก์ชั่นแสดงผล
+        # ฟังก์ชั่นแสดงผล
         show_store()
+
+        # ข้อมูลจาก user
         new_key_pressed = get_user_input()
 
+        # รอ user กดเลือกหน้าใน store
         if new_key_pressed == "0" :
             return -1
         if new_key_pressed == "1" :

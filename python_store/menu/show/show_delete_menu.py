@@ -18,7 +18,9 @@ def show_delete_menu (menu_list) :
     print( "="*36)
 
     print("ENTER MENU THAT YOU WANT TO DELETE : ",end='')
+    # รับข้อมูลการลบ
     inp = input()
+    # ตรวจสอบข้อมูลว่าถูกต้องหรือไม่
     while not ( inp.isnumeric() and int(inp) < len(menu_list) and int(inp) >= 0 ) :
         print("ERROR PLEAS REENTER : ",end='')
         inp = input()

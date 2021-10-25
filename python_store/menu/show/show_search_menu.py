@@ -12,6 +12,7 @@ def show_search_menu (menu_list,search) :
     print(" "*5,"[0] BACK")
     print()
 
+    # แสดงผลการค้นหา
     print_search_menu_list(menu_list,search)
 
     print()

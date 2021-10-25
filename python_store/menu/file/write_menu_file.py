@@ -1,5 +1,7 @@
 def write_menu_file (menu_list) :
+    # ที่อยู่ของไฟล์
     f = open('menu\menu.txt','w')
+    # แปลง list เป็น string
     str_to_write = []
     if len(menu_list) != 0 :
         for i in range(len(menu_list)) :

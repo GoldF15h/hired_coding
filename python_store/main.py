@@ -29,5 +29,6 @@ while True :
         if current_state == -1 :
             break
     except Exception as e:
+        current_state = 0
         print(e)
         _ = input()

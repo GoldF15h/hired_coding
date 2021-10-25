@@ -15,20 +15,24 @@ def show_add_new_menu (menu_list) :
     print()
     print( "="*36)
 
-
+    # รับชื่อเมนู
     print('ENTER NAME : ',end='')
     name = input()
 
+    # รับจำนวนเมนู
     print('ENTER AMOUNT : ',end='')
     amount = input()
-    while not amount.isnumeric() :
+    # ตรวจสอบรูปแบบของข้อมูลว่าถูกต้องหรือไม่
+    while not (amount.isnumeric() and int(amount) > 0) :
         print("ERROR PLEASE ENTER INTIGER : ",end='')
         amount = input()
     amount = int(amount)
 
+    # รับราคา
     print('ENTER PRICE : ',end='')
     price = input()
-    while not price.isnumeric() :
+    # ตรวจสอบรูปแบบว่าถูกต้องหรือไม่
+    while not (price.isnumeric() and int(price) > 0) :
         print("ERROR PLEASE ENTER INTIGER : ",end='')
         price = input()
     price = int(price)

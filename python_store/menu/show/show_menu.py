@@ -12,6 +12,8 @@ def show_menu (menu_list) :
     # แสดงผลส่วนของหน้าหลัก
     print( "="*10 + " LKB RESTAURANT " + "="*10 )
     print()
+    print(' '*10 + "MENU")
+    print()
     print(' '*10 + '[1] ADD TO CART')
     print(' '*10 + '[2] ADD NEW MENU')
     print(' '*10 + '[3] SEARCH MENU')
@@ -19,6 +21,7 @@ def show_menu (menu_list) :
     print(' '*10 + '[0] BACK')
     print()
 
+    # แสดงรายละเอียดของเมนู
     print_menu_list(menu_list)
 
     print()
