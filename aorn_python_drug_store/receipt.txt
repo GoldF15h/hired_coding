@@ -1,0 +1,20 @@
+
+
+
+========= KMITL DRUG STORE =========
+
+AMOUNT       NAME           SUBTOTAL
+12        testWrite         1584
+10        para              1110
+1         testAddNewDrug    3
+          1
+1         fghjbkdnsfnsda    12
+          kjghsjkafghjkd
+          fhjgjkdfhgjkhd
+          fjkkdfkgdfkgdf
+
+====================================
+TOTAL PRICE : 2709
+CASH : 3000
+**CHANGE** : 291
+====================================

@@ -5,6 +5,8 @@ from mange_file import write_drug
 from mange_file import read_cart
 from mange_file import write_cart
 
+err_msg = 'ENTER THE IN PUT WITHIN RANGE : '
+
 def show_store() :
     os.system('cls')
     print('THIS IS MAIN STORE')
@@ -16,8 +18,11 @@ def show_store() :
 
 def show_drug_list_info() :
     drug_list = read_drug()
-    for i in range(len(drug_list)) :
-        print( i , get_drug_info(drug_list[i]) )
+    if len(drug_list) > 0 :
+        for i in range(len(drug_list)) :
+            print( i , get_drug_info(drug_list[i]) )
+    else :
+        print('YOUR DRUG LIST IS EMPTY!!')
 
 def get_drug_info(x) :
     return 'NAME : ' + x['name'] + ' , PRICE ' + str(x['price']) + ' , AMOUNT : ' + str(x['amount'])
@@ -25,7 +30,7 @@ def get_drug_info(x) :
 def show_search_resault() :
     os.system('cls')
     inp = input('ENTER NAME TO SEARCH : ')
-    print('SEARCH RESAULT')
+    print('SEARCH RESAULT ...')
 
     drug_list = read_drug()
 
@@ -46,13 +51,13 @@ def add_to_cart() :
 
     ind = input('ENTER INDEX TO ADD : ')
     while not( ind.isnumeric() and 0 <= int(ind) and int(ind) < len(drug_list) ) :
-         ind = input('ENTER POSITIVE INTEGER : ')
+         ind = input(err_msg)
     ind = int(ind)
 
     amount = input('ENTER AMOUNT : ')
     # print(drug_list[ind])
     while not( amount.isnumeric() and int(amount) <= drug_list[ind]['amount'] ) :
-         amount = input('ENTER POSITIVE INTEGER : ')
+         amount = input(err_msg)
     amount = int(amount)
 
     new_to_cart = drug_list[ind].copy()
@@ -70,7 +75,7 @@ def add_to_cart() :
 
     drug_list[ind]['amount'] -= amount
 
-    if drug_list[ind]['amount'] == 0 :
+    if drug_list[ind]['amount'] <= 0 :
         drug_list.pop(ind)
     
     write_drug(drug_list)
@@ -81,11 +86,11 @@ def add_new_drug() :
 
     price = input('ENTER PRICE : ')
     while not( price.isnumeric() and int(price) > 0 ) :
-        price = input('ENTER POSITIVE INTEGER : ')
+        price = input(err_msg)
 
     amount = input('ENTER AMOUNT : ')
     while not( amount.isnumeric() and int(amount) > 0 ) :
-        amount = input('ENTER POSITIVE INTEGER : ')
+        amount = input(err_msg)
 
     drug_list = read_drug()
     new_drug = { 'name' : name , 'price' : price , 'amount' : amount }

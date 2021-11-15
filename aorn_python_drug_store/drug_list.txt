@@ -1,4 +1,5 @@
-testWrite 132 180
-aaaa 1 1
+testWrite 132 432
+aaaa 1 2
 r 2 1
-testAddNewDrug1 3 12
+testAddNewDrug1 3 11
+para 111 1
