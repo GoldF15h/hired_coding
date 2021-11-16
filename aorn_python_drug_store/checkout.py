@@ -1,4 +1,5 @@
 import os
+import datetime;
 from get_input import get_input
 from cart import show_cart_list_info
 from mange_file import read_cart
@@ -8,28 +9,34 @@ err_msg = 'ENTER THE IN PUT WITHIN RANGE : '
 
 def show_checkout() :
     os.system('cls')
-    print("THIS IS CHECKOUT")
+    print("========== CHECKOUT ==========\n")
     show_cart_list_info()
+
+    print("\n=============================\n")
+
     print('[1] CHECK OUT')
     print('[0] BACK')
 
 def payment() :
-    os.system('cls')
-    print("PAYMENT")
-    totol_price = show_cart_list_info()
-    pay_price = input("ENTER YOUR PAYMENT : ")
-    while not( pay_price.isnumeric() and totol_price <= int(pay_price) ):
-        pay_price = input(err_msg)
-    pay_price = int(pay_price)
-    receipt = create_receipt(pay_price)
-    os.system('cls')
-    print(receipt)
-    input('PRESS ENTER TO CONTINUE .....')
-    write_cart([])
+    cart_list = read_cart()
+    if len(cart_list) > 0 :
+        os.system('cls')
+        print("========== PAYMENT ==========\n")
+        totol_price = show_cart_list_info()
+        print("\n===============================")
+        pay_price = input("\nENTER YOUR PAYMENT : ")
+        while not( pay_price.isnumeric() and totol_price <= int(pay_price) ):
+            pay_price = input(err_msg)
+        pay_price = int(pay_price)
+        receipt = create_receipt(pay_price)
+        os.system('cls')
+        print(receipt)
+        input('PRESS ENTER TO CONTINUE .....')
+        write_cart([])
 
-    f = open("receipt.txt", "a")
-    f.write('\n\n\n' + receipt)
-    f.close()
+        f = open("receipt.txt", "a")
+        f.write('\n\n\n' + receipt)
+        f.close()
 
 def create_receipt (pay_price) :
     cart_list = read_cart()
@@ -39,7 +46,8 @@ def create_receipt (pay_price) :
 
     receipt = ''
     receipt += '========= KMITL DRUG STORE =========' + '\n'
-    receipt +=  '\n'
+    receipt += 'TIME : ' + str(datetime.datetime.now()) + '\n'
+    receipt += '\n'
     receipt += 'AMOUNT       NAME           SUBTOTAL' + '\n'
     
     for i in range(len(cart_list)) :

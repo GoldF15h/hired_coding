@@ -9,12 +9,13 @@ err_msg = 'ENTER THE IN PUT WITHIN RANGE : '
 
 def show_store() :
     os.system('cls')
-    print('THIS IS MAIN STORE')
+    print('=========== MAIN STORE ==========\n')
     show_drug_list_info()
-    print('[1] SEARCH DRUG')
+    print('\n=================================\n')
+    print('\n[1] SEARCH DRUG')
     print('[2] ADD DRUG TO CART')
     print('[3] ADD NEW DRUG TO LIST')
-    print('[0] BACK')
+    print('[0] BACK\n')
 
 def show_drug_list_info() :
     drug_list = read_drug()
@@ -30,7 +31,8 @@ def get_drug_info(x) :
 def show_search_resault() :
     os.system('cls')
     inp = input('ENTER NAME TO SEARCH : ')
-    print('SEARCH RESAULT ...')
+    print('\n=================================\n')
+    print('SEARCH RESAULT FOR " ' + inp +' "')
 
     drug_list = read_drug()
 
@@ -38,6 +40,7 @@ def show_search_resault() :
         if inp in drug_list[i]['name'] :
             print( i , get_drug_info(drug_list[i]) )
 
+    print('\n=================================\n')
     print('[1] ADD TO CART')
     print('[0] BACK')
 
@@ -82,6 +85,7 @@ def add_to_cart() :
 
 def add_new_drug() :
     os.system('cls')
+    print("ADDING NEW DRUG....\n")
     name = input('ENTER NAME : ')
 
     price = input('ENTER PRICE : ')

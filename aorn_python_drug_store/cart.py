@@ -11,12 +11,14 @@ err_msg = 'ENTER THE IN PUT WITHIN RANGE : '
 
 def show_cart () :
     os.system('cls')
-    print("THIS IS CART")
+    print('========== MANGE CART ==========\n')
     show_cart_list_info()
+    print('\n================================\n')
     print("[1] ADD TO CART")
     print("[2] REMOVE FROM CART")
     print("[3] CLEAR CART")
-    print("[0] BACK")
+    print("[0] BACK\n")
+
 
 def show_cart_list_info () :
     cart_list = read_cart()
@@ -37,8 +39,9 @@ def remove_from_cart():
     cart_list = read_cart()
 
     os.system('cls')
-    print("REMOVE FROM CART")
+    print("========== REMOVE FROM CART ==========\n")
     show_cart_list_info()
+    print("\n======================================\n")
 
     ind = input("ENTER THE INDEX THAT YOU WANT TO REMOVE : ")
     while not ( ind.isnumeric() and 0 <= int(ind) and int(ind) < len(cart_list) ) :
@@ -98,7 +101,9 @@ def cart() :
             return 
         elif inp == 1 :
             os.system('cls')
+            print('========== ADD TO CART ==========\n')
             show_drug_list_info()
+            print('\n================================\n')
             add_to_cart()
         elif inp == 2 :
             remove_from_cart()
