@@ -1,1 +1,1 @@
-from first_page import fist_page
+Ui_Page2
