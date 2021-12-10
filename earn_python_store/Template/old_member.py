@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'new_member.ui'
+# Form implementation generated from reading ui file 'old_member.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -16,30 +16,20 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 800)
         self.lineEdit = QtWidgets.QLineEdit(Dialog)
-        self.lineEdit.setGeometry(QtCore.QRect(450, 250, 200, 41))
+        self.lineEdit.setGeometry(QtCore.QRect(450, 300, 200, 41))
         self.lineEdit.setText("")
         self.lineEdit.setObjectName("lineEdit")
-        self.lineEdit_2 = QtWidgets.QLineEdit(Dialog)
-        self.lineEdit_2.setGeometry(QtCore.QRect(450, 330, 200, 41))
-        self.lineEdit_2.setText("")
-        self.lineEdit_2.setObjectName("lineEdit_2")
         self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(300, 450, 200, 100))
+        self.pushButton.setGeometry(QtCore.QRect(300, 400, 200, 100))
         self.pushButton.setObjectName("pushButton")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(150, 250, 200, 41))
+        self.label.setGeometry(QtCore.QRect(150, 300, 200, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(150, 330, 200, 41))
-        font = QtGui.QFont()
-        font.setPointSize(16)
-        self.label_2.setFont(font)
-        self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(220, 580, 351, 111))
+        self.label_3.setGeometry(QtCore.QRect(210, 510, 381, 111))
         font = QtGui.QFont()
         font.setPointSize(18)
         self.label_3.setFont(font)
@@ -52,9 +42,8 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.pushButton.setText(_translate("Dialog", "Enter"))
-        self.label.setText(_translate("Dialog", "Customer Name :"))
-        self.label_2.setText(_translate("Dialog", "Phone Number  :"))
-        self.label_3.setText(_translate("Dialog", "INPUT ERROR PLEASE REENTER"))
+        self.label.setText(_translate("Dialog", "Telephone       :"))
+        self.label_3.setText(_translate("Dialog", "  INPUT ERROR PLEASE REENTER"))
 
 
 if __name__ == "__main__":

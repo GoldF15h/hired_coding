@@ -17,20 +17,7 @@
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>250</y>
-     <width>200</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>330</y>
+     <y>300</y>
      <width>200</width>
      <height>41</height>
     </rect>
@@ -43,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>450</y>
+     <y>400</y>
      <width>200</width>
      <height>100</height>
     </rect>
@@ -56,7 +43,7 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>250</y>
+     <y>300</y>
      <width>200</width>
      <height>41</height>
     </rect>
@@ -67,28 +54,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Customer Name :</string>
-   </property>
-   <property name="margin">
-    <number>0</number>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>330</y>
-     <width>200</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>16</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Phone Number  :</string>
+    <string>Telephone       :</string>
    </property>
    <property name="margin">
     <number>0</number>
@@ -97,9 +63,9 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>580</y>
-     <width>351</width>
+     <x>210</x>
+     <y>510</y>
+     <width>381</width>
      <height>111</height>
     </rect>
    </property>
@@ -109,7 +75,7 @@
     </font>
    </property>
    <property name="text">
-    <string>INPUT ERROR PLEASE REENTER</string>
+    <string>  INPUT ERROR PLEASE REENTER</string>
    </property>
   </widget>
  </widget>
