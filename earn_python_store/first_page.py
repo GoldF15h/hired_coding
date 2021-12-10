@@ -1,12 +1,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from new_member import new_member
 
-class fist_page(object):
 
-    def __init__(self,Controller) -> None:
-        super().__init__()
-        self.Controller = Controller
+class first_page(object):
 
     def setupUi(self,Dialog):
+        self.main_dialog = Dialog
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 800)
         self.pushButton = QtWidgets.QPushButton(Dialog)
@@ -29,5 +28,8 @@ class fist_page(object):
         self.pushButton_2.setText(_translate("Dialog", "OLD MEMBER"))
 
     def go_to_new_member(self) :
-        # print('BTN CLICK')
-        self.Controller.open_new_member()
+        self.main_dialog.hide()
+        self.main_dialog = QtWidgets.QMainWindow()
+        self.ui = new_member()
+        self.ui.setupUi(self.main_dialog)
+        self.main_dialog.show()
