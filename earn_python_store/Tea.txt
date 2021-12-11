@@ -1,0 +1,20 @@
+Black Tea , 50
+Thai Tea , 45
+Pearl Milk Tea , 45
+Chai Tea , 45
+Early Grey Tea , 50
+English Breakfast Tea , 50
+Emperor Clouds Mist Tea , 50
+Chai Tea Latte , 50
+Early Grey Tea Latte , 50
+English Breakfast Tea Latte , 60
+Hojicha Tea Latte , 60
+Yuzu Black Tea , 55
+Mango Green Tea , 50
+Strawberry Green Tea , 55
+Passion Fruit Green Tea , 50
+Cocoa Milk Tea , 60
+Honey Lemon Black Tea , 60
+Taro Milk Tea , 55
+Jasmine Green Tea , 45
+Matcha Milk Tea , 45

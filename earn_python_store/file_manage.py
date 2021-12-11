@@ -14,9 +14,23 @@ def write_member(member_list) :
     txt_to_write = '\n'.join(member_list)
     f.write(txt_to_write)
 
+def read_menu(file) :
+    f = open(file,'r')
+    txt = f.read()
+    menu_list = txt.split('\n')
+    for i in range(len(menu_list)) :
+        tmp_menu = menu_list[i].split(' , ')
+        # print(tmp_menu)
+        menu_list[i] = (tmp_menu[0] ,tmp_menu[1])
+    return menu_list
+
 if __name__ == '__main__' :
-    l = read_member()
-    l.append({'name':'testWrite','phone_num':999})
-    write_member(l)
-    # print(l)
-    # print(l[0]['phone_num'])
+    # l = read_member()
+    # l.append({'name':'testWrite','phone_num':999})
+    # write_member(l)
+    l = read_menu('Coffee.txt')
+    l = read_menu('Dessert.txt')
+    l = read_menu('Juice.txt')
+    l = read_menu('Tea.txt')
+    # print(l)      
+    # print(type(l[0]))

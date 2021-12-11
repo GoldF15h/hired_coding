@@ -1,0 +1,20 @@
+Cake roll , 30 
+Moffin , 40 
+Banana Cake , 35
+Brownie , 35
+Chocolate lava , 35
+Waffle , 35
+Tiramisu , 100
+Macaron , 100
+Warabi Mochi , 100
+Choux Cream , 80
+Chocolate cake ball(choc ball) , 100
+Pretzel , 100
+Soft cookie , 100
+Pudding , 40
+Eclair , 50
+Chiffon Bakery , 100
+Red Velvet Cake , 100
+Granola bar , 100
+egg custrad tart , 40
+pancake , 40

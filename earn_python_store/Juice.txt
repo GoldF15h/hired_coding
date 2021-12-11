@@ -1,0 +1,20 @@
+Grape Juice , 30
+Roselle Juice , 30
+Yellow Plum Juice , 35
+Bael Fruit Juice , 35
+Apple Juice , 30
+Cherry Juice , 30
+Lemonade , 30
+Orange Juice , 30
+Fruit Smoothie , 30
+Strawberry Juice , 30
+Tamarind Juice , 35
+Roselle juice , 30
+ Tomato juice , 30
+Chrysanthemum juice , 35
+Bael fruit juice , 35
+Mango Juice , 35
+Smoothie , 35
+Kale Juice , 30
+Carrot Juice , 30
+Cucumber Juice , 30

@@ -1,0 +1,21 @@
+Espresso , 40
+Espresso Macchiato , 40
+Espresso Con Panna , 40
+Caffe Americano , 40 
+Capuccino , 40
+Flat White , 40
+Caffe Latte , 40
+Caramel Macchiato , 40
+White Chocolate Mocha , 40
+Caffe Mocha , 40
+Long Black , 40
+Piccolo , 45
+Dirty Coffee , 45
+Dalgona Coffee , 45
+Cafe au Lait , 45
+Half-Caff , 40
+Brewed Coffee , 40
+Decaf , 40
+Black coffee , 40
+Frappe , 40
+TEST , 999
