@@ -21,15 +21,25 @@ class first_page(object):
         self.main_dialog = Dialog
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 800)
+
+        top_space = 200
+        left_space = 210
+        space_btw_btn = 125
+
         self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(210, 260, 391, 91))
+        self.pushButton.setGeometry(QtCore.QRect(left_space, top_space, 391, 91))
         self.pushButton.setObjectName("pushButton")
         self.pushButton.clicked.connect(self.go_to_new_member)
 
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(210, 410, 391, 91))
+        self.pushButton_2.setGeometry(QtCore.QRect(left_space, top_space + space_btw_btn, 391, 91))
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_2.clicked.connect(self.go_to_old_member)
+
+        self.pushButton_3 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_3.setGeometry(QtCore.QRect(left_space, top_space + space_btw_btn*2, 391, 91))
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_3.clicked.connect(self.go_to_recipt)
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -39,6 +49,7 @@ class first_page(object):
         Dialog.setWindowTitle(_translate("Dialog", "FIRST PAGE"))
         self.pushButton.setText(_translate("Dialog", "NEW MEMBER"))
         self.pushButton_2.setText(_translate("Dialog", "OLD MEMBER"))
+        self.pushButton_3.setText(_translate("Dialog", "RECIPTS"))
 
     def go_to_new_member(self) :
         self.main_dialog.hide()
@@ -51,6 +62,13 @@ class first_page(object):
         self.main_dialog.hide()
         self.main_dialog = QtWidgets.QMainWindow()
         self.ui = old_member()
+        self.ui.setupUi(self.main_dialog)
+        self.main_dialog.show()
+
+    def go_to_recipt(self) :
+        self.main_dialog.hide()
+        self.main_dialog = QtWidgets.QMainWindow()
+        self.ui = receipt()
         self.ui.setupUi(self.main_dialog)
         self.main_dialog.show()
 
@@ -71,13 +89,19 @@ class new_member(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 800)
 
+        self.back_to_main_menu_btn = QtWidgets.QPushButton(Dialog)
+        self.back_to_main_menu_btn.setGeometry(QtCore.QRect(720, 0, 80, 40))
+        self.back_to_main_menu_btn.setText("MAIN MENU")
+        self.back_to_main_menu_btn.clicked.connect(self.go_back_to_main_menu)
+
+
         self.lineEdit = QtWidgets.QLineEdit(Dialog)
-        self.lineEdit.setGeometry(QtCore.QRect(450, 250, 200, 41))
+        self.lineEdit.setGeometry(QtCore.QRect(410, 250, 200, 41))
         self.lineEdit.setText("")
         self.lineEdit.setObjectName("lineEdit")
 
         self.lineEdit_2 = QtWidgets.QLineEdit(Dialog)
-        self.lineEdit_2.setGeometry(QtCore.QRect(450, 330, 200, 41))
+        self.lineEdit_2.setGeometry(QtCore.QRect(410, 330, 200, 41))
         self.lineEdit_2.setText("")
         self.lineEdit_2.setObjectName("lineEdit_2")
 
@@ -87,14 +111,14 @@ class new_member(object):
         self.pushButton.clicked.connect(self.go_to_menu)
 
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(150, 250, 200, 41))
+        self.label.setGeometry(QtCore.QRect(190, 250, 200, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.label.setFont(font)
         self.label.setObjectName("label")
 
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(150, 330, 200, 41))
+        self.label_2.setGeometry(QtCore.QRect(190, 330, 200, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.label_2.setFont(font)
@@ -118,6 +142,13 @@ class new_member(object):
         self.label_2.setText(_translate("Dialog", "Phone Number  :"))
         self.label_3.setText(_translate("Dialog", ""))
 
+    def go_back_to_main_menu(self) :
+        self.main_dialog.hide()
+        self.main_dialog = QtWidgets.QMainWindow()
+        self.ui = first_page()
+        self.ui.setupUi(self.main_dialog)
+        self.main_dialog.show()
+        
     def go_to_menu (self) :
         # print("DATA",self.lineEdit.text() , self.lineEdit_2.text())
         
@@ -141,7 +172,7 @@ class new_member(object):
             self.main_dialog.hide()
             self.main_dialog = QtWidgets.QMainWindow()
             self.ui = menu()
-            self.ui.setupUi(self.main_dialog,'',0)
+            self.ui.setupUi(self.main_dialog,'Dessert.txt',0,{})
             self.main_dialog.show()
 
     def show_err (self) :
@@ -166,20 +197,29 @@ class old_member(object):
         self.main_dialog = Dialog
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 800)
+
+        self.back_to_main_menu_btn = QtWidgets.QPushButton(Dialog)
+        self.back_to_main_menu_btn.setGeometry(QtCore.QRect(720, 0, 80, 40))
+        self.back_to_main_menu_btn.setText("MAIN MENU")
+        self.back_to_main_menu_btn.clicked.connect(self.go_back_to_main_menu)
+
         self.lineEdit = QtWidgets.QLineEdit(Dialog)
-        self.lineEdit.setGeometry(QtCore.QRect(450, 300, 200, 41))
+        self.lineEdit.setGeometry(QtCore.QRect(410, 300, 200, 41))
         self.lineEdit.setText("")
         self.lineEdit.setObjectName("lineEdit")
+
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(300, 400, 200, 100))
         self.pushButton.setObjectName("pushButton")
         self.pushButton.clicked.connect(self.go_to_member_data)
+
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(150, 300, 200, 41))
+        self.label.setGeometry(QtCore.QRect(190, 300, 200, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.label.setFont(font)
         self.label.setObjectName("label")
+
         self.label_3 = QtWidgets.QLabel(Dialog)
         self.label_3.setGeometry(QtCore.QRect(210, 510, 381, 111))
         font = QtGui.QFont()
@@ -196,6 +236,13 @@ class old_member(object):
         self.pushButton.setText(_translate("Dialog", "Enter"))
         self.label.setText(_translate("Dialog", "Telephone       :"))
         self.label_3.setText(_translate("Dialog", ""))
+
+    def go_back_to_main_menu(self) :
+        self.main_dialog.hide()
+        self.main_dialog = QtWidgets.QMainWindow()
+        self.ui = first_page()
+        self.ui.setupUi(self.main_dialog)
+        self.main_dialog.show()
 
     def go_to_member_data (self) :
         
@@ -242,30 +289,37 @@ class show_member_data(object):
         self.main_dialog = Dialog
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 800)
+
+        self.back_to_main_menu_btn = QtWidgets.QPushButton(Dialog)
+        self.back_to_main_menu_btn.setGeometry(QtCore.QRect(720, 0, 80, 40))
+        self.back_to_main_menu_btn.setText("MAIN MENU")
+        self.back_to_main_menu_btn.clicked.connect(self.go_back_to_main_menu)
+
+
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(300, 450, 200, 100))
         self.pushButton.setObjectName("pushButton")
         self.pushButton.clicked.connect(self.go_to_menu)
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(150, 250, 200, 41))
+        self.label.setGeometry(QtCore.QRect(190, 250, 200, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(150, 330, 200, 41))
+        self.label_2.setGeometry(QtCore.QRect(190, 330, 200, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.label_4 = QtWidgets.QLabel(Dialog)
-        self.label_4.setGeometry(QtCore.QRect(450, 250, 200, 41))
+        self.label_4.setGeometry(QtCore.QRect(410, 250, 200, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(Dialog)
-        self.label_5.setGeometry(QtCore.QRect(450, 330, 200, 41))
+        self.label_5.setGeometry(QtCore.QRect(410, 330, 200, 41))
         font = QtGui.QFont()
         font.setPointSize(16)
         self.label_5.setFont(font)
@@ -295,11 +349,18 @@ class show_member_data(object):
         self.label_4.setText(_translate("Dialog", name))
         self.label_5.setText(_translate("Dialog", phone_number))
 
+    def go_back_to_main_menu(self) :
+        self.main_dialog.hide()
+        self.main_dialog = QtWidgets.QMainWindow()
+        self.ui = first_page()
+        self.ui.setupUi(self.main_dialog)
+        self.main_dialog.show()
+
     def go_to_menu (self) :
         self.main_dialog.hide()
         self.main_dialog = QtWidgets.QMainWindow()
         self.ui = menu()
-        self.ui.setupUi(self.main_dialog,'',0)
+        self.ui.setupUi(self.main_dialog,'Dessert.txt',0,{})
         self.main_dialog.show()
 
 #  ________  ___  ___  ________  ________  ________  _______           _____ ______   _______   ________   ___  ___     
@@ -395,6 +456,11 @@ class menu(object):
 
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 800)
+
+        self.back_to_main_menu_btn = QtWidgets.QPushButton(Dialog)
+        self.back_to_main_menu_btn.setGeometry(QtCore.QRect(720, 0, 80, 40))
+        self.back_to_main_menu_btn.setText("MAIN MENU")
+        self.back_to_main_menu_btn.clicked.connect(self.go_back_to_main_menu)
 
         self.pushButton_3 = QtWidgets.QPushButton(Dialog)
         self.pushButton_3.setGeometry(QtCore.QRect(50, 750, 130, 41))
@@ -545,6 +611,13 @@ class menu(object):
         self.label_6.setText(_translate("Dialog", "Price"))
         # self.pushButton.setText(_translate("Dialog", ">"))
         # self.pushButton_2.setText(_translate("Dialog", "<"))
+
+    def go_back_to_main_menu(self) :
+        self.main_dialog.hide()
+        self.main_dialog = QtWidgets.QMainWindow()
+        self.ui = first_page()
+        self.ui.setupUi(self.main_dialog)
+        self.main_dialog.show()
 
     def go_to_Dessert(self) :
         self.update_menu('Dessert.txt',0)
@@ -796,13 +869,17 @@ if __name__ == '__main__' :
     app = QtWidgets.QApplication(sys.argv)
     # Dialog = QtWidgets.QDialog()
     Dialog = QtWidgets.QMainWindow()
-    # ui = first_page()
-    # ui.setupUi(Dialog)
+
+    ui = first_page()
+    ui.setupUi(Dialog)
+
     # ui = menu()
     # ui.setupUi(Dialog,'Dessert.txt',0,{})
     # ui.setupUi(Dialog,'CheckOut',0,{})
-    ui = receipt()
-    ui.setupUi(Dialog)
+
+    # ui = receipt()
+    # ui.setupUi(Dialog)
+
     Dialog.show()
     sys.exit(app.exec_())
 
