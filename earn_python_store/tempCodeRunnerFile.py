@@ -1,1 +1,1 @@
-Ui_Page2
+self.recipt_list

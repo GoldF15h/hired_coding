@@ -385,11 +385,13 @@ class choose_menu(object):
                                                   
                                                   
 class menu(object):
-    def setupUi(self, Dialog,file,page):
+    def setupUi(self, Dialog,file,page,recipt_list):
         # print(file,page)
+        # print('recipt_list',recipt_list)
         self.main_dialog = Dialog
         self.file = file
         self.page = page
+        self.recipt_list = recipt_list
 
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 800)
@@ -416,12 +418,12 @@ class menu(object):
         self.pushButton_7.clicked.connect(self.go_to_Recipt)
 
         self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(680, 720, 51, 23))
+        self.pushButton.setGeometry(QtCore.QRect(680, 720, 60, 23))
         self.pushButton.setObjectName("pushButton")
         self.pushButton.clicked.connect(self.go_right)
         self.pushButton.setText('>')
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(620, 720, 51, 23))
+        self.pushButton_2.setGeometry(QtCore.QRect(610, 720, 60, 23))
         self.pushButton_2.setObjectName("pushButton_2")
         self.pushButton_2.clicked.connect(self.go_left)
         self.pushButton_2.setText('<')
@@ -432,7 +434,7 @@ class menu(object):
         font.setWeight(75)
 
         if file == 'Dessert.txt' :
-            self.pushButton_3.setFont(font)
+            self.pushButton_3.setFont(font) 
         if file == 'Coffee.txt' :
             self.pushButton_4.setFont(font)
         if file == 'Tea.txt' :
@@ -440,7 +442,37 @@ class menu(object):
         if file == 'Juice.txt' :
             self.pushButton_6.setFont(font)
 
-        self.menu_list = read_menu(file)
+        if file == 'CheckOut' :
+            self.pushButton_7.setFont(font)
+
+            l = []
+            self.total_price = 0
+            for i in self.recipt_list.keys() :
+                sub_total = int(self.recipt_list[i]['amount']) * int(self.recipt_list[i]['price']) 
+                # sub_total = 'TestPrice'
+                self.total_price += sub_total
+                l.append([ i, str(sub_total) ])
+            self.menu_list = l
+
+
+            self.total_price_txt = QtWidgets.QLabel(Dialog)
+            self.total_price_txt.setGeometry(QtCore.QRect(195, 720, 141, 16))
+            self.total_price_txt.setText('TOTAL PRICE : ' + str(self.total_price) + ' ฿')
+
+            self.payment = QtWidgets.QLineEdit(Dialog)
+            self.payment.setGeometry(QtCore.QRect(330,720 , 130, 23))
+
+            self.checkOutBtn = QtWidgets.QPushButton(Dialog)
+            self.checkOutBtn.setGeometry(QtCore.QRect(470, 720, 130, 23))
+            self.checkOutBtn.setText('Check out')
+            self.checkOutBtn.clicked.connect(self.check_out)
+
+            self.refBtn = QtWidgets.QPushButton(Dialog)
+            self.refBtn.setGeometry(QtCore.QRect(610, 690, 130, 23))
+            self.refBtn.setText('Refresh')
+            self.refBtn.clicked.connect(self.refresh)
+        else :
+            self.menu_list = read_menu(file)
 
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(10, 10, 141, 16))
@@ -460,34 +492,27 @@ class menu(object):
         for i in range(len(self.menu_list)) :
             # print(self.menu_list[i])
             shifter = 30 * i
-            self.checkBox = QtWidgets.QCheckBox(Dialog)
-            self.checkBox.setGeometry(QtCore.QRect(left_space , menu_top_space + shifter, 21, 17))
-            self.checkBox.setText("")
+            checkBox = QtWidgets.QCheckBox(Dialog)
+            checkBox.setGeometry(QtCore.QRect(left_space , menu_top_space + shifter, 21, 17))
+            checkBox.setText("")
 
             # self.checkBox.setObjectName("checkBox")
-            self.label = QtWidgets.QLabel(Dialog)
-            self.label.setGeometry(QtCore.QRect(left_space + 60, menu_top_space + shifter, 141, 16))
-            self.label.setText(self.menu_list[i][0])
+            label = QtWidgets.QLabel(Dialog)
+            label.setGeometry(QtCore.QRect(left_space + 60, menu_top_space + shifter, 141, 16))
+            label.setText(self.menu_list[i][0])
 
-            self.lineEdit = QtWidgets.QLineEdit(Dialog)
-            self.lineEdit.setGeometry(QtCore.QRect(left_space + 280, menu_top_space + shifter, 113, 20))
+            lineEdit = QtWidgets.QLineEdit(Dialog)
+            lineEdit.setGeometry(QtCore.QRect(left_space + 280, menu_top_space + shifter, 113, 20))
+            lindEditText = ''
+            if self.recipt_list.get(self.menu_list[i][0]) :
+                lindEditText = self.recipt_list[self.menu_list[i][0]]['amount']
+            lineEdit.setText(lindEditText)
 
-            self.label_2 = QtWidgets.QLabel(Dialog)
-            self.label_2.setGeometry(QtCore.QRect(left_space + 570, menu_top_space + shifter, 141, 16))
-            self.label_2.setText(self.menu_list[i][1])
+            label_2 = QtWidgets.QLabel(Dialog)
+            label_2.setGeometry(QtCore.QRect(left_space + 570, menu_top_space + shifter, 141, 16))
+            label_2.setText(self.menu_list[i][1])
 
-        # self.checkBox = QtWidgets.QCheckBox(Dialog)
-        # self.checkBox.setGeometry(QtCore.QRect(50, 100, 21, 17))
-        # self.checkBox.setText("")
-        # # self.checkBox.setObjectName("checkBox")
-        # self.label = QtWidgets.QLabel(Dialog)
-        # self.label.setGeometry(QtCore.QRect(110, 100, 141, 16))
-        # self.label.setText('ShowName')
-        # self.lineEdit = QtWidgets.QLineEdit(Dialog)
-        # self.lineEdit.setGeometry(QtCore.QRect(330, 100, 113, 20))
-        # self.label_2 = QtWidgets.QLabel(Dialog)
-        # self.label_2.setGeometry(QtCore.QRect(620, 100, 141, 16))
-        # self.label_2.setText('ShowPrice')
+            self.show_menu_list.append([checkBox,label,lineEdit,label_2])
 
         self.label_3 = QtWidgets.QLabel(Dialog)
         self.label_3.setGeometry(QtCore.QRect(left_space, top_space, 31, 16))
@@ -534,7 +559,7 @@ class menu(object):
         self.update_menu('Juice.txt',0)
 
     def go_to_Recipt(self) :
-        pass
+        self.update_menu('CheckOut',0)
 
     def go_right(self) :
         if self.page < self.max_page - 1 :
@@ -544,12 +569,52 @@ class menu(object):
         if self.page > 0 :
             self.update_menu(self.file,self.page-1)
 
-    def update_menu(self,file,page) :
+    def refresh (self) :
+        self.update_menu(self.file,self.page,True)
+
+    def check_out (self) :
+        if self.payment.text().isnumeric() and ( self.total_price < int(self.payment.text()) ) :
+            # print('checkoutpass')
+            new_recipt = []
+            member_list = read_member()
+            new_recipt += [ member_list[cur_member_index]['name']  , member_list[cur_member_index]['phone_num'] , str(self.total_price) , self.payment.text() ]
+            for i in self.recipt_list.keys() :
+                new_recipt.append(i+'`'+self.recipt_list[i]['amount']+'`'+self.recipt_list[i]['price'])
+            new_recipt = '~'.join(new_recipt)
+            write_recipt(new_recipt)
+            # print(new_recipt)
+
+    def update_menu(self,file,page,isRefresh=False) :
+        # print('UPDATE!!')
+        for i in range(len(self.show_menu_list)) :
+            cur_amount = self.show_menu_list[i][2].text()
+            if cur_amount != '' and cur_amount.isnumeric() and int(cur_amount) > 0 :
+                name = self.show_menu_list[i][1].text()
+                amount = self.show_menu_list[i][2].text()
+                price = self.show_menu_list[i][3].text()
+                if self.recipt_list.get(name) :
+                    if not isRefresh :
+                        self.recipt_list[name] = {'amount':amount,'price':price,'_price' : price,'_price' : price}
+                    else :
+                        self.recipt_list[name] = {'amount':amount,'price':  self.recipt_list[name]['_price'] ,'_price' : self.recipt_list[name]['_price']}
+                        # print(self.recipt_list[name],price,amount)
+                else :
+                    self.recipt_list.update({name:{'amount':amount,'price':price , '_price':price}})
+
         self.main_dialog.hide()
         self.main_dialog = QtWidgets.QMainWindow()
         self.ui = menu()
-        self.ui.setupUi(self.main_dialog,file,page)
+        self.ui.setupUi(self.main_dialog,file,page,self.recipt_list)
         self.main_dialog.show()
+#  ________  _______   ________  _______   ___  ________  _________   
+# |\   __  \|\  ___ \ |\   ____\|\  ___ \ |\  \|\   __  \|\___   ___\ 
+# \ \  \|\  \ \   __/|\ \  \___|\ \   __/|\ \  \ \  \|\  \|___ \  \_| 
+#  \ \   _  _\ \  \_|/_\ \  \    \ \  \_|/_\ \  \ \   ____\   \ \  \  
+#   \ \  \\  \\ \  \_|\ \ \  \____\ \  \_|\ \ \  \ \  \___|    \ \  \ 
+#    \ \__\\ _\\ \_______\ \_______\ \_______\ \__\ \__\        \ \__\
+#     \|__|\|__|\|_______|\|_______|\|_______|\|__|\|__|         \|__|
+                                                                    
+                                                                    
 
 
 #  _____ ______   ________  ___  ________      
@@ -567,8 +632,10 @@ if __name__ == '__main__' :
     # Dialog = QtWidgets.QDialog()
     Dialog = QtWidgets.QMainWindow()
     # ui = first_page()
+    # ui.setupUi(Dialog)
     ui = menu()
-    ui.setupUi(Dialog,'Dessert.txt',0)
+    # ui.setupUi(Dialog,'Dessert.txt',0,{})
+    ui.setupUi(Dialog,'CheckOut',0,{})
     Dialog.show()
     sys.exit(app.exec_())
 
