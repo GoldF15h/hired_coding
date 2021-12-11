@@ -583,6 +583,11 @@ class menu(object):
             new_recipt = '~'.join(new_recipt)
             write_recipt(new_recipt)
             # print(new_recipt)
+            self.main_dialog.hide()
+            self.main_dialog = QtWidgets.QMainWindow()
+            self.ui = receipt()
+            self.ui.setupUi(self.main_dialog)
+            self.main_dialog.show()
 
     def update_menu(self,file,page,isRefresh=False) :
         # print('UPDATE!!')
@@ -615,7 +620,167 @@ class menu(object):
 #     \|__|\|__|\|_______|\|_______|\|_______|\|__|\|__|         \|__|
                                                                     
                                                                     
+class receipt(object):
+    def setupUi(self, Dialog , ind = -1 , page = 0 , search_num = ''):
+        self.main_dialog = Dialog
+        self.page = page
+        self.search_num = search_num
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(800, 800)
+        self.pushButton_3 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_3.setGeometry(QtCore.QRect(50, 750, 130, 41))
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_3.setText("<")
+        self.pushButton_3.clicked.connect(self.go_left)
 
+        self.pushButton_4 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_4.setGeometry(QtCore.QRect(190, 750, 130, 41))
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.pushButton_4.setText(">")
+        self.pushButton_4.clicked.connect(self.go_right)
+
+        self.pushButton_6 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_6.setGeometry(QtCore.QRect(470, 750, 130, 41))
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.pushButton_6.clicked.connect(self.search)
+
+        self.pushButton_7 = QtWidgets.QPushButton(Dialog)
+        self.pushButton_7.setGeometry(QtCore.QRect(610, 750, 130, 41))
+        self.pushButton_7.setObjectName("pushButton_7")
+        self.pushButton_7.clicked.connect(self.back)
+
+        self.recipt_list = read_recipt()
+        self.max_recipt_index = len(self.recipt_list)
+        if self.search_num != '' :
+            # print('SEARCHING....')
+            i = 0
+            while i < len(self.recipt_list) :
+                if self.search_num not in str(self.recipt_list[i]['phone_num']) :
+                    self.recipt_list.pop(i)
+                else :
+                    i += 1
+
+        if ind == -1 :
+            ind = len(self.recipt_list)-1
+        self.ind = ind
+        self.cur_recipt = self.recipt_list[ind]
+
+        top_space = 30
+        left_space = 50
+
+        self.ord_no = QtWidgets.QLabel(Dialog)
+        self.ord_no.setGeometry(QtCore.QRect(left_space, top_space, 700, 50))
+        self.ord_no.setText('ORD NO : ' + str(self.cur_recipt['ind']+1) + '/' + str(self.max_recipt_index) )
+        self.ord_no.setFont(QtGui.QFont('Arial', 15))
+
+        self.label_7 = QtWidgets.QLabel(Dialog)
+        self.label_7.setGeometry(QtCore.QRect(left_space, top_space + 50, 700, 13))
+        self.label_7.setText('NAME : ' + self.cur_recipt['name'])
+
+        self.label_8 = QtWidgets.QLabel(Dialog)
+        self.label_8.setGeometry(QtCore.QRect(left_space, top_space + 75, 700, 16))
+        self.label_8.setText('PHONE NUMBER : ' + self.cur_recipt['phone_num'])
+
+        top_space = 650
+        # left_space = 100
+
+        self.total_price = QtWidgets.QLabel(Dialog)
+        self.total_price.setGeometry(QtCore.QRect(left_space, top_space, 700, 13))
+        self.total_price.setText('TOTAL PRICE : ' + self.cur_recipt['total_price'])
+
+        self.pay_price = QtWidgets.QLabel(Dialog)
+        self.pay_price.setGeometry(QtCore.QRect(left_space, top_space + 25, 700, 13))
+        self.pay_price.setText('PAY PRICE : ' + self.cur_recipt['pay_price'])
+
+        self.change = QtWidgets.QLabel(Dialog)
+        self.change.setGeometry(QtCore.QRect(left_space, top_space + 50, 700, 13))
+        self.change.setText('CHANGE : ' +  str(int(self.cur_recipt['pay_price']) - int(self.cur_recipt['total_price']) ) )
+
+        self.lineEdit = QtWidgets.QLineEdit(Dialog)
+        self.lineEdit.setGeometry(QtCore.QRect(330, 750, 130, 41))
+        self.lineEdit.setObjectName("lineEdit")
+
+        self.item_list = self.cur_recipt['item_list']
+        self.show_item_list = []
+
+        left_space = 80
+        top_space = 150
+
+        self.table_name = QtWidgets.QLabel(Dialog)
+        self.table_name.setGeometry(QtCore.QRect(left_space , top_space, 141, 16))
+        self.table_name.setText('NAME')
+
+        self.table_amount = QtWidgets.QLabel(Dialog)
+        self.table_amount.setGeometry(QtCore.QRect(left_space + 290, top_space, 113, 20))
+        self.table_amount.setText('AMOUNT')
+
+        self.table_sub_total = QtWidgets.QLabel(Dialog)
+        self.table_sub_total.setGeometry(QtCore.QRect(left_space + 540, top_space, 141, 16))
+        self.table_sub_total.setText('PRICE')
+
+        left_space = 80
+        top_space = 200
+
+        for i in range(len(self.item_list)) :
+            # print(self.menu_list[i])
+            shifter = 30 * i
+            # checkBox = QtWidgets.QCheckBox(Dialog)
+            # checkBox.setGeometry(QtCore.QRect(left_space , menu_top_space + shifter, 21, 17))
+            # checkBox.setText("")
+
+            # self.checkBox.setObjectName("checkBox")
+            label = QtWidgets.QLabel(Dialog)
+            label.setGeometry(QtCore.QRect(left_space , top_space + shifter, 141, 16))
+            label.setText(self.item_list[i][0])
+
+            lineEdit = QtWidgets.QLabel(Dialog)
+            lineEdit.setGeometry(QtCore.QRect(left_space + 300, top_space + shifter, 113, 20))
+            lindEditText = self.item_list[i][1]
+            lineEdit.setText(lindEditText)
+
+            label_2 = QtWidgets.QLabel(Dialog)
+            label_2.setGeometry(QtCore.QRect(left_space + 550, top_space + shifter, 141, 16))
+            label_2.setText(self.item_list[i][2])
+
+            self.show_item_list.append([label,lineEdit,label_2])
+
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.pushButton_6.setText(_translate("Dialog", "SEARCH"))
+        self.pushButton_7.setText(_translate("Dialog", "MAIN MENU"))
+        # self.label_7.setText(_translate("Dialog", "NAME :"))
+        # self.label_8.setText(_translate("Dialog", "PHONE NUMBER :"))
+
+    def back(self) :
+        self.main_dialog.hide()
+        self.main_dialog = QtWidgets.QMainWindow()
+        self.ui = first_page()
+        self.ui.setupUi(self.main_dialog)
+        self.main_dialog.show()
+
+    def go_left(self) :
+        if self.ind > 0 :
+            self.update_recipt(self.ind-1,self.search_num)
+
+    def go_right(self) :
+        if self.ind < len(self.recipt_list) - 1 :
+            self.update_recipt(self.ind+1,self.search_num)
+
+    def search(self) :
+        # print('SEARCH',self.lineEdit.text())
+        self.update_recipt(0,self.lineEdit.text())
+
+
+    def update_recipt(self,ind,search_num='') :
+        self.main_dialog.hide()
+        self.main_dialog = QtWidgets.QMainWindow()
+        self.ui = receipt()
+        self.ui.setupUi(self.main_dialog,ind,0,search_num)
+        self.main_dialog.show()
 
 #  _____ ______   ________  ___  ________      
 # |\   _ \  _   \|\   __  \|\  \|\   ___  \    
@@ -633,9 +798,11 @@ if __name__ == '__main__' :
     Dialog = QtWidgets.QMainWindow()
     # ui = first_page()
     # ui.setupUi(Dialog)
-    ui = menu()
+    # ui = menu()
     # ui.setupUi(Dialog,'Dessert.txt',0,{})
-    ui.setupUi(Dialog,'CheckOut',0,{})
+    # ui.setupUi(Dialog,'CheckOut',0,{})
+    ui = receipt()
+    ui.setupUi(Dialog)
     Dialog.show()
     sys.exit(app.exec_())
 

@@ -32,13 +32,42 @@ def write_recipt(new_recipt) :
     f.writelines('\n'+new_recipt)
     f.close()
 
+def read_recipt() :
+    f = open('Recipt.txt','r')
+    txt = f.read()
+    l = txt.split('\n')
+    if l[0] == '' :
+        l.pop(0)
+
+    recipt_list = []
+    for i in range(len(l)) :
+
+        cur_recipt = l[i].split('~')  
+
+        d = {}
+        d.update({'name' : cur_recipt[0]})
+        d.update({'phone_num' : cur_recipt[1]})
+        d.update({'total_price' : cur_recipt[2]})
+        d.update({'pay_price' : cur_recipt[3]})
+        d.update({'ind' : i})
+        tmp_list = []
+        for i in range(4,len(cur_recipt)) :
+            cur_item = cur_recipt[i].split('`')
+            tmp_list.append(cur_item)
+        d.update({'item_list' : tmp_list})
+
+        recipt_list.append(d)
+
+    return recipt_list
+
 if __name__ == '__main__' :
     # l = read_member()
     # l.append({'name':'testWrite','phone_num':999})
     # write_member(l)
-    l = read_menu('Coffee.txt')
-    l = read_menu('Dessert.txt')
-    l = read_menu('Juice.txt')
-    l = read_menu('Tea.txt')
-    # print(l)      
+    # l = read_menu('Coffee.txt')
+    # l = read_menu('Dessert.txt')
+    # l = read_menu('Juice.txt')
+    # l = read_menu('Tea.txt')
+    l = read_recipt()
+    print(l[0])      
     # print(type(l[0]))
