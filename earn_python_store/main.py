@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from file_manage import *
 
 cur_member_index = 0
+isOldMember = False
 
 
 #  ________ ___  ________  ________  _________        ________  ________  ________  _______      
@@ -52,6 +53,8 @@ class first_page(object):
         self.pushButton_3.setText(_translate("Dialog", "RECIPTS"))
 
     def go_to_new_member(self) :
+        global isOldMember
+        isOldMember = False
         self.main_dialog.hide()
         self.main_dialog = QtWidgets.QMainWindow()
         self.ui = new_member()
@@ -59,6 +62,8 @@ class first_page(object):
         self.main_dialog.show()
 
     def go_to_old_member(self) :
+        global isOldMember
+        isOldMember = True
         self.main_dialog.hide()
         self.main_dialog = QtWidgets.QMainWindow()
         self.ui = old_member()
@@ -520,10 +525,16 @@ class menu(object):
                 l.append([ i, str(sub_total) ])
             self.menu_list = l
 
-
+            # print(isOldMember)
+            if isOldMember :
+                price_label_text = 'TOTAL PRICE WITH 10% DISCOUNT : ' + str(self.total_price*0.9) + ' ฿'
+                price_label_geo = QtCore.QRect(50, 720, 250, 16)
+            else :
+                price_label_text = 'TOTAL PRICE : ' + str(self.total_price/1) + ' ฿'
+                price_label_geo = QtCore.QRect(195, 720, 250, 16)
             self.total_price_txt = QtWidgets.QLabel(Dialog)
-            self.total_price_txt.setGeometry(QtCore.QRect(195, 720, 141, 16))
-            self.total_price_txt.setText('TOTAL PRICE : ' + str(self.total_price) + ' ฿')
+            self.total_price_txt.setGeometry(price_label_geo)
+            self.total_price_txt.setText(price_label_text)
 
             self.payment = QtWidgets.QLineEdit(Dialog)
             self.payment.setGeometry(QtCore.QRect(330,720 , 130, 23))
@@ -552,45 +563,46 @@ class menu(object):
 
         self.show_menu_list = []
         
-        left_space = 80
+        left_space = 115
         top_space = 30
         menu_top_space = top_space + 60
         for i in range(len(self.menu_list)) :
             # print(self.menu_list[i])
             shifter = 30 * i
-            checkBox = QtWidgets.QCheckBox(Dialog)
-            checkBox.setGeometry(QtCore.QRect(left_space , menu_top_space + shifter, 21, 17))
-            checkBox.setText("")
+            # checkBox = QtWidgets.QCheckBox(Dialog)
+            # checkBox.setGeometry(QtCore.QRect(left_space , menu_top_space + shifter, 21, 17))
+            # checkBox.setText("")
 
             # self.checkBox.setObjectName("checkBox")
             label = QtWidgets.QLabel(Dialog)
-            label.setGeometry(QtCore.QRect(left_space + 60, menu_top_space + shifter, 141, 16))
+            label.setGeometry(QtCore.QRect(left_space, menu_top_space + shifter, 141, 16))
             label.setText(self.menu_list[i][0])
 
             lineEdit = QtWidgets.QLineEdit(Dialog)
-            lineEdit.setGeometry(QtCore.QRect(left_space + 280, menu_top_space + shifter, 113, 20))
+            lineEdit.setGeometry(QtCore.QRect(left_space + 220, menu_top_space + shifter, 113, 20))
             lindEditText = ''
             if self.recipt_list.get(self.menu_list[i][0]) :
                 lindEditText = self.recipt_list[self.menu_list[i][0]]['amount']
             lineEdit.setText(lindEditText)
 
             label_2 = QtWidgets.QLabel(Dialog)
-            label_2.setGeometry(QtCore.QRect(left_space + 570, menu_top_space + shifter, 141, 16))
+            label_2.setGeometry(QtCore.QRect(left_space + 510, menu_top_space + shifter, 141, 16))
             label_2.setText(self.menu_list[i][1])
 
-            self.show_menu_list.append([checkBox,label,lineEdit,label_2])
+            # self.show_menu_list.append([checkBox,label,lineEdit,label_2])
+            self.show_menu_list.append([0,label,lineEdit,label_2])
 
-        self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(left_space, top_space, 31, 16))
-        self.label_3.setObjectName("label_3")
+        # self.label_3 = QtWidgets.QLabel(Dialog)
+        # self.label_3.setGeometry(QtCore.QRect(left_space, top_space, 31, 16))
+        # self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(Dialog)
-        self.label_4.setGeometry(QtCore.QRect(left_space+60, top_space, 141, 16))
+        self.label_4.setGeometry(QtCore.QRect(left_space, top_space, 141, 16))
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(Dialog)
-        self.label_5.setGeometry(QtCore.QRect(left_space+310, top_space, 41, 16))
+        self.label_5.setGeometry(QtCore.QRect(left_space+250, top_space, 41, 16))
         self.label_5.setObjectName("label_5")
         self.label_6 = QtWidgets.QLabel(Dialog)
-        self.label_6.setGeometry(QtCore.QRect(left_space+570, top_space, 141, 16))
+        self.label_6.setGeometry(QtCore.QRect(left_space+510, top_space, 141, 16))
         self.label_6.setObjectName("label_6")
         
 
@@ -605,7 +617,7 @@ class menu(object):
         self.pushButton_5.setText(_translate("Dialog", "Tea"))
         self.pushButton_6.setText(_translate("Dialog", "Juice"))
         self.pushButton_7.setText(_translate("Dialog", "Recipt"))
-        self.label_3.setText(_translate("Dialog", "Select"))
+        # self.label_3.setText(_translate("Dialog", "Select"))
         self.label_4.setText(_translate("Dialog", "Name"))
         self.label_5.setText(_translate("Dialog", "Amount"))
         self.label_6.setText(_translate("Dialog", "Price"))
@@ -646,11 +658,18 @@ class menu(object):
         self.update_menu(self.file,self.page,True)
 
     def check_out (self) :
-        if self.payment.text().isnumeric() and ( self.total_price < int(self.payment.text()) ) :
+        # print(self.payment.text(),self.total_price)
+        if isOldMember :
+            self.total_price *= 0.9
+        if self.payment.text().isnumeric() and ( self.total_price <= int(self.payment.text()) ) :
             # print('checkoutpass')
             new_recipt = []
             member_list = read_member()
-            new_recipt += [ member_list[cur_member_index]['name']  , member_list[cur_member_index]['phone_num'] , str(self.total_price) , self.payment.text() ]
+            if isOldMember :
+                total_price_str = str(self.total_price * 0.9) + ' ฿ WITH 10% DISCOUNT '
+            else :
+                total_price_str = str(self.total_price/1)
+            new_recipt += [ member_list[cur_member_index]['name']  , member_list[cur_member_index]['phone_num'] , total_price_str , self.payment.text() ]
             for i in self.recipt_list.keys() :
                 new_recipt.append(i+'`'+self.recipt_list[i]['amount']+'`'+self.recipt_list[i]['price'])
             new_recipt = '~'.join(new_recipt)
@@ -743,7 +762,7 @@ class receipt(object):
 
         self.ord_no = QtWidgets.QLabel(Dialog)
         self.ord_no.setGeometry(QtCore.QRect(left_space, top_space, 700, 50))
-        self.ord_no.setText('ORD NO : ' + str(self.cur_recipt['ind']+1) + '/' + str(self.max_recipt_index) )
+        self.ord_no.setText('ORDER NO : ' + str(self.cur_recipt['ind']+1) + '/' + str(self.max_recipt_index) )
         self.ord_no.setFont(QtGui.QFont('Arial', 15))
 
         self.label_7 = QtWidgets.QLabel(Dialog)
@@ -767,7 +786,7 @@ class receipt(object):
 
         self.change = QtWidgets.QLabel(Dialog)
         self.change.setGeometry(QtCore.QRect(left_space, top_space + 50, 700, 13))
-        self.change.setText('CHANGE : ' +  str(int(self.cur_recipt['pay_price']) - int(self.cur_recipt['total_price']) ) )
+        self.change.setText('CHANGE : ' +  str(int(self.cur_recipt['pay_price']) - float(self.cur_recipt['total_price'].split()[0]) ) )
 
         self.lineEdit = QtWidgets.QLineEdit(Dialog)
         self.lineEdit.setGeometry(QtCore.QRect(330, 750, 130, 41))
