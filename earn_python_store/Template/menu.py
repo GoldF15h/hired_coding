@@ -23,9 +23,13 @@ class Ui_Dialog(object):
         font.setWeight(75)
         self.pushButton_3.setFont(font)
         self.pushButton_3.setObjectName("pushButton_3")
+
         self.pushButton_4 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_4.setGeometry(QtCore.QRect(190, 750, 130, 41))
+        self.pushButton_4.setGeometry(QtCore.QRect(0, 0, 200, 200))
         self.pushButton_4.setObjectName("pushButton_4")
+        self.pushButton_4.clicked.connect(self.btnClick)
+
+
         self.pushButton_5 = QtWidgets.QPushButton(Dialog)
         self.pushButton_5.setGeometry(QtCore.QRect(330, 750, 130, 41))
         self.pushButton_5.setObjectName("pushButton_5")
@@ -86,6 +90,11 @@ class Ui_Dialog(object):
         self.label_6.setText(_translate("Dialog", "Price"))
         self.pushButton.setText(_translate("Dialog", ">"))
         self.pushButton_2.setText(_translate("Dialog", "<"))
+
+    def btnClick(self) :
+        print('BTN CLICK',self.lineEdit.text())
+
+        
 
 
 if __name__ == "__main__":

@@ -156,7 +156,7 @@ class new_member(object):
         
     def go_to_menu (self) :
         # print("DATA",self.lineEdit.text() , self.lineEdit_2.text())
-        
+        global cur_member_index
         name = self.lineEdit.text()
         phone_num = self.lineEdit_2.text()
 
@@ -172,7 +172,9 @@ class new_member(object):
                     break
             if isFound == 0 :
                 member_list.append({'name':name,'phone_num':phone_num})
+
             write_member(member_list)
+            cur_member_index = len(member_list) - 1
 
             self.main_dialog.hide()
             self.main_dialog = QtWidgets.QMainWindow()
@@ -666,7 +668,7 @@ class menu(object):
             new_recipt = []
             member_list = read_member()
             if isOldMember :
-                total_price_str = str(self.total_price * 0.9) + ' ฿ WITH 10% DISCOUNT '
+                total_price_str = str(self.total_price * 0.9) + ' WITH 10% DISCOUNT '
             else :
                 total_price_str = str(self.total_price/1)
             new_recipt += [ member_list[cur_member_index]['name']  , member_list[cur_member_index]['phone_num'] , total_price_str , self.payment.text() ]
@@ -691,7 +693,7 @@ class menu(object):
                 price = self.show_menu_list[i][3].text()
                 if self.recipt_list.get(name) :
                     if not isRefresh :
-                        self.recipt_list[name] = {'amount':amount,'price':price,'_price' : price,'_price' : price}
+                        self.recipt_list[name] = {'amount':amount,'price':self.recipt_list[name]['_price'],'_price' : self.recipt_list[name]['_price']}
                     else :
                         self.recipt_list[name] = {'amount':amount,'price':  self.recipt_list[name]['_price'] ,'_price' : self.recipt_list[name]['_price']}
                         # print(self.recipt_list[name],price,amount)
@@ -888,6 +890,7 @@ if __name__ == '__main__' :
     app = QtWidgets.QApplication(sys.argv)
     # Dialog = QtWidgets.QDialog()
     Dialog = QtWidgets.QMainWindow()
+    app.setFont(QtGui.QFont("Arial",10))
 
     ui = first_page()
     ui.setupUi(Dialog)

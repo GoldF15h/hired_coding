@@ -4,6 +4,5 @@
 1~1~60~123~Carrot Juice`1`30~Cucumber Juice`1`30
 12~12~60~123~Carrot Juice`1`30~Cucumber Juice`1`30
 lnwzaaaaa~12334566666666~1340~10000~Chiffon Bakery`12`100~Granola bar`1`100~pancake`1`40
-asd~123~135.0 ß WITH 10% DISCOUNT ~13000~Soft cookie`1`100~Eclair`1`50
-asd~123~145.8 ß WITH 10% DISCOUNT ~180~Tiramisu`1`100~Warabi Mochi`1`100
 asdasdasd~134324234~200.0~200~Soft cookie`1`100~Chiffon Bakery`1`100
+asdasd~123~931.5 WITH 10% DISCOUNT ~1035~Eclair`1`50~Granola bar`11`100
